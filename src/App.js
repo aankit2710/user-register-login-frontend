@@ -8,8 +8,7 @@ function App() {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = async data => {
-    console.log(data)
-    const mobileInString = data.mobileNumber.toString();
+  const mobileInString = data.mobileNumber.toString();
     // eslint-disable-next-line
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const valid = regex.test(data.email)
@@ -35,7 +34,6 @@ function App() {
       body: JSON.stringify(data)
     };
     const response = await fetch(url, requestOptions);
-    console.log('response', response);
     const dataa = await response.json();
     console.log("dataa", dataa);
     if (dataa.error) {

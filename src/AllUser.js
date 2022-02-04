@@ -1,4 +1,3 @@
-import { axios } from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
@@ -8,20 +7,11 @@ function AllUser() {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async data => {
-        console.log(data)
-
-        var header = {
-            "Content-Type": "application/json",
-        };
 
         const body = {
             "userName": data.userName,
             "password": data.password
         };
-
-        console.log(body);
-
-        //aankit2685jhjjh@gmail.com
 
         const url = "https://user-register-login-api.herokuapp.com/api/user/login";
         const requestOptions = {
@@ -30,7 +20,6 @@ function AllUser() {
             body: JSON.stringify(body)
           };
           const response = await fetch(url, requestOptions);
-          console.log('response', response);
           const dataa = await response.json();
           console.log("dataa", dataa);
           if (dataa.status === 'error') {
@@ -39,10 +28,6 @@ function AllUser() {
           else {
             alert('User login Successfully')
           }
-          // const responseData = await axios.post(url, body, {
-        //     headers: header,
-        // });
-        // console.log(responseData);
     };
 
 
