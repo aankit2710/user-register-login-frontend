@@ -32,7 +32,7 @@ function App() {
       "Content-Type": "application/json",
     };
 
-    const url = "localhost:4200/api/user/register";
+    const url = "https://user-register-login-api.herokuapp.com/api/user/register";
     const responseData = await axios.post(url, data, {
       headers: header,
     });

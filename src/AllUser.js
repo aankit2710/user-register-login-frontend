@@ -21,7 +21,7 @@ function AllUser() {
 
         console.log(body);
 
-        const url = "localhost:4200/api/user/login";
+        const url = "https://user-register-login-api.herokuapp.com/api/user/login";
         const responseData = await axios.post(url, body, {
             headers: header,
         });
