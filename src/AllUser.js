@@ -21,11 +21,28 @@ function AllUser() {
 
         console.log(body);
 
+        //aankit2685jhjjh@gmail.com
+
         const url = "https://user-register-login-api.herokuapp.com/api/user/login";
-        const responseData = await axios.post(url, body, {
-            headers: header,
-        });
-        console.log(responseData);
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+          };
+          const response = await fetch(url, requestOptions);
+          console.log('response', response);
+          const dataa = await response.json();
+          console.log("dataa", dataa);
+          if (dataa.status === 'error') {
+            alert(dataa.error)
+          }
+          else {
+            alert('User login Successfully')
+          }
+          // const responseData = await axios.post(url, body, {
+        //     headers: header,
+        // });
+        // console.log(responseData);
     };
 
 

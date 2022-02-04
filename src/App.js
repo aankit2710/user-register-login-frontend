@@ -1,4 +1,3 @@
-import { axios } from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
@@ -10,7 +9,7 @@ function App() {
 
   const onSubmit = async data => {
     console.log(data)
-    const mobileInString = data.number.toString();
+    const mobileInString = data.mobileNumber.toString();
     // eslint-disable-next-line
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const valid = regex.test(data.email)
@@ -28,16 +27,23 @@ function App() {
       return;
     }
 
-    var header = {
-      "Content-Type": "application/json",
-    };
-
     const url = "https://user-register-login-api.herokuapp.com/api/user/register";
-    const responseData = await axios.post(url, data, {
-      headers: header,
-    });
-    console.log(responseData);
 
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    };
+    const response = await fetch(url, requestOptions);
+    console.log('response', response);
+    const dataa = await response.json();
+    console.log("dataa", dataa);
+    if (dataa.error) {
+      alert(dataa.message)
+    }
+    else {
+      alert('User Registered Successfully')
+    }
     // alert('User added Successfully')
     //     console.log(data)
   };
@@ -93,8 +99,8 @@ function App() {
                   className="mb-3"
                   controlId="exampleForm.ControlInput1"
                 >
-                  <Form.Control type="text" placeholder="Number" pattern="[0-9]{10}" {...register("number", { required: true })} />
-                  {errors.number && <span>mobile Number is required</span>}
+                  <Form.Control type="text" placeholder="Number" pattern="[0-9]{10}" {...register("mobileNumber", { required: true })} />
+                  {errors.mobileNumber && <span>mobile Number is required</span>}
                 </Form.Group>
                 <Form.Group
                   className="mb-3"
@@ -103,8 +109,10 @@ function App() {
                   <Form.Control
                     as="textarea"
                     placeholder="Address"
+                    {...register("address", { required: true })}
                     style={{ height: '100px' }}
                   />
+                  {errors.address && <span>address is required</span>}
                 </Form.Group>
                 <Button type="submit" variant="primary">Submit</Button>
               </Form>
