@@ -10,7 +10,8 @@ function App() {
 
   const onSubmit = async data => {
     console.log(data)
-    const mobileInString = data.number.toString()
+    const mobileInString = data.number.toString();
+    // eslint-disable-next-line
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const valid = regex.test(data.email)
 
